@@ -1,0 +1,50 @@
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <input type="text" id="searchTextId" [(ngModel)]="searchText" name="searchText" placeholder="Search By Title">
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-sm-12">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Title</th>
+            <th scope="col">URL</th>
+            <th scope="col">Created At</th>
+            <th scope="col">Author</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="cursor: pointer" *ngFor="let post of postList | searchTitle: searchText" (click)="showPopupModal(post)">
+            <th scope="row">{{post.title}}</th>
+            <td>{{post.url}}</td>
+            <td>{{post.created_at}}</td>
+            <td>{{post.author}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Popup content -->
+<div bsModal #popupModal="bs-modal" class="modal fade" tabindex="-1"
+     role="dialog" aria-labelledby="dialog-child-name">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-child-name" class="modal-title pull-left">Detail</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="hidePopupModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre class="data-height">{{popupUserDetails | json}}</pre>
+      </div>
+    </div>
+  </div>
+</div>
